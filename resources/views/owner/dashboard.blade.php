@@ -32,7 +32,7 @@
             background: white;
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             margin-bottom: 25px;
         }
 
@@ -74,21 +74,21 @@
             color: var(--text-dark);
             outline: none;
         }
-
+        
         .btn-filter {
             background: var(--indigo-primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 0 20px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            height: 40px; 
+            height: 40px;
             transition: 0.2s;
         }
 
-        .btn-filter:hover { 
-            background: #4338ca; 
+        .btn-filter:hover {
+            background: #4338ca;
         }
 
         .summary-grid {
@@ -136,30 +136,30 @@
             margin-top: 10px;
         }
 
-        .table-responsive th { 
-            text-align: left; 
-            padding: 15px; 
-            border-bottom: 2px solid #f1f5f9; 
-            color: var(--text-muted); 
+        .table-responsive th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            color: var(--text-muted);
             font-size: 0.9rem;
             text-transform: uppercase;
         }
 
-        .table-responsive td { 
-            padding: 15px; 
-            border-bottom: 1px solid #f1f5f9; 
+        .table-responsive td {
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
             color: var(--text-dark);
         }
 
-        .td-uang { 
-            font-weight: 800; 
-            color: var(--emerald-primary); 
+        .td-uang {
+            font-weight: 800;
+            color: var(--emerald-primary);
         }
 
-        .td-plat { 
-            font-weight: bold; 
+        .td-plat {
+            font-weight: bold;
         }
-        
+
         .badge-durasi {
             background: var(--slate-bg);
             padding: 5px 10px;
@@ -167,6 +167,40 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             border: 1px solid #e2e8f0;
+        }
+
+        .btn-cetak {
+            background-color: #dc3545;
+            color: white;
+            padding: 0 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            height: 40px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cetak:hover {
+            background-color: #c82333;
+        }
+        @media print {
+            .hilang-saat-print, aside, nav, header, footer, .main-sidebar, .main-header, .sidebar, .navbar {
+                display: none !important;
+            }
+            .content-wrapper, .main-panel, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: white !important;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .card { box-shadow: none !important; border: 1px solid #e2e8f0; }
         }
     </style>
 </head>
@@ -176,7 +210,8 @@
     @section('content')
 
     <div class="owner-container">
-        <div class="header-section">
+        
+        <div class="header-section hilang-saat-print">
             <h2 class="page-title">📈 Laporan Pendapatan</h2>
             
             <form action="{{ route('owner.dashboard') }}" method="GET" class="filter-form">
@@ -189,6 +224,10 @@
                     <input type="date" name="end_date" class="input-date" value="{{ $end_date }}">
                 </div>
                 <button type="submit" class="btn-filter">Tampilkan Data</button>
+
+                <button type="button" onclick="window.print()" class="btn-cetak">
+                    🖨️ Ekspor PDF
+                </button>
             </form>
         </div>
 
